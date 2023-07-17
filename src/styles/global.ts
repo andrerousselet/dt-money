@@ -17,4 +17,8 @@ body {
   color: ${props => props.theme["gray-100"]};
   -webkit-font-smoothing: antialiased;
 }
+
+body, input, textarea, button {
+  font: 400 1rem "Roboto", sans-serif;
+}
 `
