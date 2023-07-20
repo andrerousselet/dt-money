@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
 import { Header } from "../../components/Header";
 import { Summary } from "../../components/Summary";
+import { useTransactions } from "../../hooks/useTransactions";
+import { formatPrice } from "../../utils/formatPrice";
 import { SearchForm } from "./components/SearchForm";
 import {
   PriceHighlight,
@@ -8,30 +9,8 @@ import {
   TransactionsTable,
 } from "./styles";
 
-interface Transaction {
-  id: number;
-  description: string;
-  type: "income" | "outcome";
-  category: string;
-  price: number;
-  createdAt: string;
-}
-
 export function Transactions() {
-  const [transactions, setTransactions] = useState<Transaction[]>([]);
-
-  useEffect(() => {
-    async function getTransactions() {
-      try {
-        const response = await fetch("http://localhost:3000/transactions");
-        const data = (await response.json()) as Transaction[];
-        setTransactions(data);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    void getTransactions();
-  }, []);
+  const { transactions } = useTransactions();
 
   return (
     <>
@@ -46,10 +25,7 @@ export function Transactions() {
                 <td width="50%">{transaction.description}</td>
                 <td>
                   <PriceHighlight variant={transaction.type}>
-                    {Intl.NumberFormat("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                    }).format(transaction.price)}
+                    {formatPrice(transaction.price)}
                   </PriceHighlight>
                 </td>
                 <td>{transaction.category}</td>
