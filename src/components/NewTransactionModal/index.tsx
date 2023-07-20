@@ -21,7 +21,13 @@ const newTransactionFormSchema = z.object({
 
 type newTransactionFormInputs = z.infer<typeof newTransactionFormSchema>;
 
-export function NewTransactionModal() {
+interface NewTransactionModalProps {
+  handleModalIsOpen: (value: boolean) => void;
+}
+
+export function NewTransactionModal({
+  handleModalIsOpen,
+}: NewTransactionModalProps) {
   const { createTransaction } = useTransactions();
   const {
     reset,
@@ -36,6 +42,7 @@ export function NewTransactionModal() {
   async function handleCreateNewTransaction(data: newTransactionFormInputs) {
     await createTransaction(data);
     reset();
+    handleModalIsOpen(false);
   }
 
   return (

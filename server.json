@@ -23,6 +23,22 @@
       "type": "outcome",
       "createdAt": "2023-07-20T17:54:34.606Z",
       "id": 3
+    },
+    {
+      "description": "Desenvolvimento de App",
+      "price": 10000,
+      "category": "Serviço",
+      "type": "income",
+      "createdAt": "2023-07-20T18:22:50.186Z",
+      "id": 4
+    },
+    {
+      "description": "Açaí",
+      "price": 10,
+      "category": "Alimentação",
+      "type": "outcome",
+      "createdAt": "2023-07-20T18:24:50.137Z",
+      "id": 5
     }
   ]
 }
